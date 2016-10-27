@@ -27,12 +27,12 @@ class Boringssl < Formula
     end
 
     mkdir "build" do
-      system "cmake", "-GNinja", "..", "-DBUILD_SHARED_LIBS=1", *std_cmake_args
+      system "cmake", "-GNinja", "..", "-DBUILD_SHARED_LIBS=0", *std_cmake_args
       system "ninja"
 
       # There's no real Makefile as such. We have to handle this manually.
       bin.install "tool/bssl"
-      lib.install "crypto/libcrypto.dylib", "ssl/libssl.dylib"
+      lib.install "crypto/libcrypto.a", "ssl/libssl.a"
     end
     include.install Dir["include/*"]
   end
